@@ -1,11 +1,16 @@
 require 'sinatra'
 require './lib/accounting'
 
+set :bind, '0.0.0.0'
+
 before do
   headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
   headers['Access-Control-Allow-Origin'] = '*'
   headers['Access-Control-Allow-Headers'] = 'accept, authorization, origin'
 end
+
+Accounting::set_client_host ENV['CLIENT_HOST'] ? ENV['CLIENT_HOST'] : '127.0.0.1'
+Accounting::set_client_port ENV['CLIENT_PORT'] ? ENV['CLIENT_PORT'] : 8080
 
 options '*' do
   response.headers['Allow'] = 'HEAD,GET,PUT,DELETE,OPTIONS,POST'

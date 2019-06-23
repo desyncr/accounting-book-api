@@ -1,8 +1,8 @@
 require 'date'
 
 class Transaction
-  TRANSACTION_DEBIT   = 1
-  TRANSACTION_CREDIT  = 0
+  TRANSACTION_DEBIT   = 0
+  TRANSACTION_CREDIT  = 1
 
   def self.from_string(str)
     transaction = {}

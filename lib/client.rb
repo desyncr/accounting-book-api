@@ -1,11 +1,9 @@
 require 'socket'
 
 class Client
-  SERVER_HOST = '127.0.0.1'
-  SERVER_PORT = 8080
   DEBUG_OUTPUT = true
 
-  def initialize(host = SERVER_HOST, port = SERVER_PORT)
+  def initialize(host, port)
     @s = TCPSocket.open(host, port)
   end
 

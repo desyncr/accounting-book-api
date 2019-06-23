@@ -8,9 +8,19 @@ class Accounting
   OPERATION_CREDIT        = 101
   OPERATION_BALANCE       = 102
   OPERATION_TRANSACTIONS  = 103
+  @client_host           = '127.0.0.1'
+  @client_port           = 8080
+
+  def self.set_client_host(host)
+    @client_host = host
+  end
+
+  def self.set_client_port(port)
+    @client_port = port
+  end
 
   def self.get_balance_for_account(account)
-    client = Client.new
+    client = Client.new @client_host, @client_port
     payload = sprintf(
       "%020d%03d%14s",
       account.to_i,
@@ -24,7 +34,7 @@ class Accounting
   end
 
   def self.get_transactions_for_account(account)
-    client = Client.new
+    client = Client.new @client_host, @client_port
     payload = sprintf(
       "%020d%03d%14s",
       account.to_i,
@@ -37,7 +47,7 @@ class Accounting
   end
 
   def self.get_transaction_by_id(transaction)
-    client = Client.new
+    client = Client.new @client_host, @client_port
     payload = sprintf(
       "%020d%03d%14s",
       transaction.to_i,
@@ -51,7 +61,7 @@ class Accounting
 
 
   def self.debit(account, amount)
-    client = Client.new
+    client = Client.new @client_host, @client_port
     payload = sprintf(
       "%020d%03d%14s%04d",
       account.to_i,
@@ -65,7 +75,7 @@ class Accounting
   end
 
   def self.credit(account, amount)
-    client = Client.new
+    client = Client.new @client_host, @client_port
     payload = sprintf(
       "%020d%03d%14s%04d",
       account.to_i,
